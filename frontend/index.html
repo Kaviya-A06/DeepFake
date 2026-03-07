@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeepFake Detector — AI Media Forensics Platform</title>
+  <meta name="description" content="Advanced AI-powered deepfake detection for images, videos, and audio using multimodal forensic analysis." />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <!-- ── Navbar ─────────────────────────────────────────────── -->
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <div class="brand-icon">🔍</div>
+      <div>
+        <div class="brand-name">DeepFake Detector</div>
+        <div class="brand-sub">AI Media Forensics</div>
+      </div>
+    </div>
+    <div class="navbar-badge">
+      <span class="status-dot"></span>
+      <span>System Online</span>
+    </div>
+  </nav>
+
+  <!-- ── Hero ───────────────────────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-eyebrow">
+      🛡️ Multimodal AI Forensics
+    </div>
+    <h1 class="hero-title">
+      Unmask the Fake.<br/>
+      <span>Protect the Truth.</span>
+    </h1>
+    <p class="hero-subtitle">
+      Upload any image, video, or audio file. Our engine runs
+      <strong>25 forensic detection methods</strong> simultaneously and
+      delivers a comprehensive authenticity report in seconds.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-value">10</div>
+        <div class="stat-label">Image Methods</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">8</div>
+        <div class="stat-label">Video Methods</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">7</div>
+        <div class="stat-label">Audio Methods</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">25+</div>
+        <div class="stat-label">Total Signals</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Main Content ───────────────────────────────────────── -->
+  <main class="main-content">
+
+    <!-- Tab Navigation -->
+    <div class="tab-nav" role="tablist">
+      <button class="tab-btn active" role="tab" aria-selected="true" data-tab="image" id="tab-image">
+        <span class="tab-icon">🖼️</span>
+        <span>Image</span>
+        <span class="tab-count">10</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="video" id="tab-video">
+        <span class="tab-icon">🎬</span>
+        <span>Video</span>
+        <span class="tab-count">8</span>
+      </button>
+      <button class="tab-btn" role="tab" aria-selected="false" data-tab="audio" id="tab-audio">
+        <span class="tab-icon">🎵</span>
+        <span>Audio</span>
+        <span class="tab-count">7</span>
+      </button>
+    </div>
+
+    <!-- ════════════════ IMAGE PANEL ════════════════ -->
+    <div class="tab-panel active" id="panel-image" role="tabpanel">
+      <!-- Upload -->
+      <div class="upload-section">
+        <div class="upload-zone" id="image-drop-zone">
+          <div class="upload-icon-wrapper">🖼️</div>
+          <div class="upload-title">Drop your image here</div>
+          <div class="upload-subtitle">Or click to browse from your computer</div>
+          <button class="upload-btn" id="image-browse-btn">📂 Browse Files</button>
+          <input type="file" id="image-file-input" accept=".jpg,.jpeg,.png,.bmp,.tiff,.webp" hidden />
+          <div class="upload-formats">
+            <span>JPG</span><span>PNG</span><span>BMP</span><span>TIFF</span><span>WEBP</span>
+            <span style="color:var(--text-muted); font-family:var(--font-sans);">· Max 20MB</span>
+          </div>
+        </div>
+
+        <div class="file-info-bar" id="image-file-info">
+          <span class="file-info-icon">🖼️</span>
+          <div>
+            <div class="file-info-name" id="image-file-name">—</div>
+            <div class="file-info-meta" id="image-file-meta">—</div>
+          </div>
+          <button class="analyze-btn" id="image-analyze-btn">🔬 Analyze Image</button>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div class="error-banner" id="image-error">
+        <span>⚠️</span>
+        <span id="image-error-msg">An error occurred.</span>
+      </div>
+
+      <!-- Progress -->
+      <div class="progress-section" id="image-progress">
+        <div class="progress-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring spinner-ring-inner"></div>
+        </div>
+        <div class="progress-title">Analyzing Image...</div>
+        <div class="progress-subtitle">Running 10 forensic detection methods simultaneously</div>
+        <div class="method-progress-list" id="image-method-list"></div>
+      </div>
+
+      <!-- Results -->
+      <div class="results-section" id="image-results">
+        <!-- Verdict Banner -->
+        <div class="verdict-banner" id="image-verdict-banner">
+          <div class="verdict-ring-container">
+            <div class="verdict-ring-wrapper">
+              <svg class="confidence-ring" viewBox="0 0 180 180" width="180" height="180">
+                <circle class="ring-track" cx="90" cy="90" r="76"/>
+                <circle class="ring-fill" id="image-ring-fill" cx="90" cy="90" r="76"
+                  stroke-dasharray="477.52" stroke-dashoffset="477.52" stroke="url(#img-gradient)"/>
+                <defs>
+                  <linearGradient id="img-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff006e"/>
+                    <stop offset="100%" stop-color="#ff3860"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="ring-center-text">
+                <span class="ring-percentage" id="image-pct">—%</span>
+                <span class="ring-label">Fake Score</span>
+              </div>
+            </div>
+          </div>
+          <div class="verdict-title" id="image-verdict-title">—</div>
+          <div class="verdict-description" id="image-verdict-desc">—</div>
+          <div class="verdict-pills">
+            <span class="verdict-pill" id="image-risk-pill">Risk: —</span>
+            <span class="verdict-pill" id="image-methods-pill">Methods: —</span>
+            <span class="verdict-pill" id="image-size-pill">Size: —</span>
+          </div>
+        </div>
+
+        <!-- Charts -->
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">🎯</div>
+              <div>
+                <div class="chart-card-title">Method Scores Radar</div>
+                <div class="chart-card-sub">All 10 detection signal strengths</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="image-radar-chart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">📊</div>
+              <div>
+                <div class="chart-card-title">Detection Breakdown</div>
+                <div class="chart-card-sub">Fake probability per method</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="image-bar-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <!-- ELA Overlay -->
+        <div class="ela-card" id="image-ela-section" style="display:none">
+          <div class="chart-card-header">
+            <div class="chart-card-icon">🔬</div>
+            <div>
+              <div class="chart-card-title">Error Level Analysis (ELA)</div>
+              <div class="chart-card-sub">Bright regions highlight potential manipulation areas</div>
+            </div>
+          </div>
+          <div class="ela-images-grid">
+            <div class="ela-img-wrapper">
+              <img id="image-original-preview" src="" alt="Original" />
+              <span class="ela-img-label">📷 Original Image</span>
+            </div>
+            <div class="ela-img-wrapper">
+              <img id="image-ela-preview" src="" alt="ELA" />
+              <span class="ela-img-label">🔬 ELA Heatmap (10× amplified)</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Method Cards -->
+        <div class="methods-section">
+          <div class="methods-header">
+            <div class="methods-title">📋 Detailed Method Analysis</div>
+          </div>
+          <div class="methods-grid" id="image-methods-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ VIDEO PANEL ════════════════ -->
+    <div class="tab-panel" id="panel-video" role="tabpanel">
+      <div class="upload-section">
+        <div class="upload-zone" id="video-drop-zone">
+          <div class="upload-icon-wrapper">🎬</div>
+          <div class="upload-title">Drop your video here</div>
+          <div class="upload-subtitle">Or click to browse from your computer</div>
+          <button class="upload-btn" id="video-browse-btn">📂 Browse Files</button>
+          <input type="file" id="video-file-input" accept=".mp4,.avi,.mov,.mkv,.webm,.flv" hidden />
+          <div class="upload-formats">
+            <span>MP4</span><span>AVI</span><span>MOV</span><span>MKV</span><span>WEBM</span>
+            <span style="color:var(--text-muted); font-family:var(--font-sans);">· Max 200MB</span>
+          </div>
+        </div>
+        <div class="file-info-bar" id="video-file-info">
+          <span class="file-info-icon">🎬</span>
+          <div>
+            <div class="file-info-name" id="video-file-name">—</div>
+            <div class="file-info-meta" id="video-file-meta">—</div>
+          </div>
+          <button class="analyze-btn" id="video-analyze-btn">🔬 Analyze Video</button>
+        </div>
+      </div>
+
+      <div class="error-banner" id="video-error">
+        <span>⚠️</span><span id="video-error-msg">An error occurred.</span>
+      </div>
+
+      <div class="progress-section" id="video-progress">
+        <div class="progress-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring spinner-ring-inner"></div>
+        </div>
+        <div class="progress-title">Analyzing Video...</div>
+        <div class="progress-subtitle">Extracting frames and running 8 temporal analysis methods</div>
+        <div class="method-progress-list" id="video-method-list"></div>
+      </div>
+
+      <div class="results-section" id="video-results">
+        <div class="verdict-banner" id="video-verdict-banner">
+          <div class="verdict-ring-container">
+            <div class="verdict-ring-wrapper">
+              <svg class="confidence-ring" viewBox="0 0 180 180" width="180" height="180">
+                <circle class="ring-track" cx="90" cy="90" r="76"/>
+                <circle class="ring-fill" id="video-ring-fill" cx="90" cy="90" r="76"
+                  stroke-dasharray="477.52" stroke-dashoffset="477.52" stroke="url(#vid-gradient)"/>
+                <defs>
+                  <linearGradient id="vid-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#ff006e"/><stop offset="100%" stop-color="#8b5cf6"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="ring-center-text">
+                <span class="ring-percentage" id="video-pct">—%</span>
+                <span class="ring-label">Fake Score</span>
+              </div>
+            </div>
+          </div>
+          <div class="verdict-title" id="video-verdict-title">—</div>
+          <div class="verdict-description" id="video-verdict-desc">—</div>
+          <div class="verdict-pills">
+            <span class="verdict-pill" id="video-risk-pill">Risk: —</span>
+            <span class="verdict-pill" id="video-duration-pill">Duration: —</span>
+            <span class="verdict-pill" id="video-frames-pill">Frames: —</span>
+          </div>
+        </div>
+
+        <div class="video-meta-card" id="video-meta-card" style="display:none">
+          <img class="video-preview-thumb" id="video-thumb" src="" alt="Video frame" />
+          <div class="video-meta-items">
+            <div class="video-meta-item">
+              <div class="video-meta-label">Duration</div>
+              <div class="video-meta-value" id="vm-duration">—</div>
+            </div>
+            <div class="video-meta-item">
+              <div class="video-meta-label">FPS</div>
+              <div class="video-meta-value" id="vm-fps">—</div>
+            </div>
+            <div class="video-meta-item">
+              <div class="video-meta-label">Frames</div>
+              <div class="video-meta-value" id="vm-frames">—</div>
+            </div>
+            <div class="video-meta-item">
+              <div class="video-meta-label">Size</div>
+              <div class="video-meta-value" id="vm-size">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">🎯</div>
+              <div>
+                <div class="chart-card-title">Method Scores Radar</div>
+                <div class="chart-card-sub">8 temporal detection signals</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="video-radar-chart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">📊</div>
+              <div>
+                <div class="chart-card-title">Detection Breakdown</div>
+                <div class="chart-card-sub">Fake probability per method</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="video-bar-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="methods-section">
+          <div class="methods-header">
+            <div class="methods-title">📋 Detailed Method Analysis</div>
+          </div>
+          <div class="methods-grid" id="video-methods-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════════════════ AUDIO PANEL ════════════════ -->
+    <div class="tab-panel" id="panel-audio" role="tabpanel">
+      <div class="upload-section">
+        <div class="upload-zone" id="audio-drop-zone">
+          <div class="upload-icon-wrapper">🎵</div>
+          <div class="upload-title">Drop your audio here</div>
+          <div class="upload-subtitle">Or click to browse from your computer</div>
+          <button class="upload-btn" id="audio-browse-btn">📂 Browse Files</button>
+          <input type="file" id="audio-file-input" accept=".mp3,.wav,.flac,.ogg,.m4a,.aac" hidden />
+          <div class="upload-formats">
+            <span>MP3</span><span>WAV</span><span>FLAC</span><span>OGG</span><span>AAC</span>
+            <span style="color:var(--text-muted); font-family:var(--font-sans);">· Max 50MB</span>
+          </div>
+        </div>
+        <div class="file-info-bar" id="audio-file-info">
+          <span class="file-info-icon">🎵</span>
+          <div>
+            <div class="file-info-name" id="audio-file-name">—</div>
+            <div class="file-info-meta" id="audio-file-meta">—</div>
+          </div>
+          <button class="analyze-btn" id="audio-analyze-btn">🔬 Analyze Audio</button>
+        </div>
+      </div>
+
+      <div class="error-banner" id="audio-error">
+        <span>⚠️</span><span id="audio-error-msg">An error occurred.</span>
+      </div>
+
+      <div class="progress-section" id="audio-progress">
+        <div class="progress-spinner">
+          <div class="spinner-ring"></div>
+          <div class="spinner-ring spinner-ring-inner"></div>
+        </div>
+        <div class="progress-title">Analyzing Audio...</div>
+        <div class="progress-subtitle">Running 7 speech forensics methods on your audio</div>
+        <div class="method-progress-list" id="audio-method-list"></div>
+      </div>
+
+      <div class="results-section" id="audio-results">
+        <div class="verdict-banner" id="audio-verdict-banner">
+          <div class="verdict-ring-container">
+            <div class="verdict-ring-wrapper">
+              <svg class="confidence-ring" viewBox="0 0 180 180" width="180" height="180">
+                <circle class="ring-track" cx="90" cy="90" r="76"/>
+                <circle class="ring-fill" id="audio-ring-fill" cx="90" cy="90" r="76"
+                  stroke-dasharray="477.52" stroke-dashoffset="477.52" stroke="url(#aud-gradient)"/>
+                <defs>
+                  <linearGradient id="aud-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stop-color="#8b5cf6"/><stop offset="100%" stop-color="#00d4ff"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="ring-center-text">
+                <span class="ring-percentage" id="audio-pct">—%</span>
+                <span class="ring-label">Fake Score</span>
+              </div>
+            </div>
+          </div>
+          <div class="verdict-title" id="audio-verdict-title">—</div>
+          <div class="verdict-description" id="audio-verdict-desc">—</div>
+          <div class="verdict-pills">
+            <span class="verdict-pill" id="audio-risk-pill">Risk: —</span>
+            <span class="verdict-pill" id="audio-duration-pill">Duration: —</span>
+            <span class="verdict-pill" id="audio-sr-pill">Sample Rate: —</span>
+          </div>
+        </div>
+
+        <div class="audio-meta-card">
+          <div class="audio-waveform-visual" id="audio-waveform">
+            <!-- Generated by JS -->
+          </div>
+          <div class="video-meta-items">
+            <div class="video-meta-item">
+              <div class="video-meta-label">Duration</div>
+              <div class="video-meta-value" id="am-duration">—</div>
+            </div>
+            <div class="video-meta-item">
+              <div class="video-meta-label">Sample Rate</div>
+              <div class="video-meta-value" id="am-sr">—</div>
+            </div>
+            <div class="video-meta-item">
+              <div class="video-meta-label">File Size</div>
+              <div class="video-meta-value" id="am-size">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="charts-grid">
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">🎯</div>
+              <div>
+                <div class="chart-card-title">Method Scores Radar</div>
+                <div class="chart-card-sub">7 speech forensics signals</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="audio-radar-chart"></canvas>
+            </div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header">
+              <div class="chart-card-icon">📊</div>
+              <div>
+                <div class="chart-card-title">Detection Breakdown</div>
+                <div class="chart-card-sub">Fake probability per method</div>
+              </div>
+            </div>
+            <div class="chart-container" style="height:280px">
+              <canvas id="audio-bar-chart"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="methods-section">
+          <div class="methods-header">
+            <div class="methods-title">📋 Detailed Method Analysis</div>
+          </div>
+          <div class="methods-grid" id="audio-methods-grid"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Footer ─────────────────────────────────────────────── -->
+  <footer>
+    <p>DeepFake Detector &copy; 2025 — AI Media Forensics Platform &nbsp;|&nbsp;
+       <span style="color:var(--accent-cyan)">25 Detection Methods</span> &nbsp;|&nbsp;
+       Powered by Flask &amp; OpenCV
+    </p>
+  </footer>
+
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
