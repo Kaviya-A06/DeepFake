@@ -1,10 +1,10 @@
-# 🔍 DeepFake Detector — AI Media Forensics Platform
+#  DeepFake Detector — AI Media Forensics Platform
 
 A professional, full-stack deepfake detection web application that analyzes images, videos, and audio files using **25 forensic detection methods** and delivers a comprehensive authenticity report.
 
 ---
 
-## 🚀 Quick Start (Windows)
+##  Quick Start (Windows)
 
 ### Option 1 — One-click launcher (Recommended)
 ```
@@ -29,9 +29,9 @@ Then open `http://localhost:5000` in your browser.
 
 ---
 
-## 🧠 Detection Methods
+##  Detection Methods
 
-### 🖼️ Image Analysis (10 Methods)
+###  Image Analysis (10 Methods)
 | Method | Description |
 |--------|-------------|
 | **Error Level Analysis (ELA)** | Detects inconsistent JPEG compression artifacts from tampering |
@@ -45,7 +45,7 @@ Then open `http://localhost:5000` in your browser.
 | **GAN Fingerprint Detection** | Spectral checkerboard from transposed convolution upsampling |
 | **PRNU Analysis** | Checks for missing camera sensor fingerprint |
 
-### 🎬 Video Analysis (8 Methods)
+###  Video Analysis (8 Methods)
 | Method | Description |
 |--------|-------------|
 | **Frame-Level ELA** | ELA applied across sampled video frames |
@@ -57,7 +57,7 @@ Then open `http://localhost:5000` in your browser.
 | **Head Pose Estimation** | Detects unnatural face orientation changes |
 | **Color Temporal Stability** | Skin tone consistency across frames |
 
-### 🎵 Audio Analysis (7 Methods)
+###  Audio Analysis (7 Methods)
 | Method | Description |
 |--------|-------------|
 | **MFCC Statistical Analysis** | Mel-frequency cepstral coefficient distribution |
@@ -70,7 +70,7 @@ Then open `http://localhost:5000` in your browser.
 
 ---
 
-## 🏗️ Project Structure
+##  Project Structure
 
 ```
 DeepFake/
@@ -92,7 +92,7 @@ DeepFake/
 
 ---
 
-## 📦 Requirements
+##  Requirements
 
 - **Python 3.10+**
 - All other dependencies are auto-installed via `start.bat` or `pip install -r backend/requirements.txt`
@@ -101,7 +101,7 @@ Key packages: `flask`, `flask-cors`, `Pillow`, `opencv-python`, `numpy`, `scipy`
 
 ---
 
-## 📊 How the Scoring Works
+##  How the Scoring Works
 
 1. Each method returns a **fake probability score** from 0.0 (authentic) to 1.0 (fake)
 2. Method scores are combined using **weighted ensemble scoring** tailored per modality
@@ -110,7 +110,7 @@ Key packages: `flask`, `flask-cors`, `Pillow`, `opencv-python`, `numpy`, `scipy`
 
 ---
 
-## 🎨 UI Features
+##  UI Features
 
 - Premium dark theme with glassmorphism card design
 - Animated SVG confidence ring with percentage indicator
